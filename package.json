@@ -2,24 +2,53 @@
   "name": "snooze",
   "version": "0.1.0",
   "private": true,
+  "author": "Edison Cheung",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "prepare": "husky",
+    "commit": "git add . && git-cz"
   },
   "dependencies": {
+    "@trpc-swr/client": "^2.0.1",
+    "@trpc/client": "^11.7.2",
+    "@trpc/server": "^11.7.2",
+    "drizzle-orm": "^0.45.0",
+    "formik": "^2.4.9",
+    "formik-validator-zod": "^2.2.0",
+    "mysql2": "^3.15.3",
     "next": "16.0.7",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "swr": "^2.3.7",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "typescript": "^5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }
