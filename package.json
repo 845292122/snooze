@@ -16,20 +16,17 @@
   "dependencies": {
     "@chakra-ui/react": "^3.30.0",
     "@emotion/react": "^11.14.0",
-    "@trpc-swr/client": "^2.0.1",
-    "@trpc/client": "^11.7.2",
-    "@trpc/server": "^11.7.2",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.45.0",
     "formik": "^2.4.9",
-    "formik-validator-zod": "^2.2.0",
+    "hono": "^4.10.7",
     "lucide-react": "^0.556.0",
     "mysql2": "^3.15.3",
     "next": "16.0.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "swr": "^2.3.7",
-    "zod": "^4.1.13"
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",

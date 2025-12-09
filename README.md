@@ -2,20 +2,28 @@
 
 saas快速开发模板
 
+| 部署方式 | ✔ 单体部署，不拆服务 |
+| 前端 | Next + Chakra + SWR |
+| 后端 | Hono + Drizzle |
+| 验证 | Yup（前后端共用） |
+| 认证 | NextAuth |
+| API 方式 | 全 REST（Hono） |
+
 ## 技术栈
 
 - 前端: React Next.js
 - 后端: Hono
 - UI: Chakra UI
 - 数据库: Drizzle ORM + Mysql
-- 通信: tRPC + swr
+- 通信: swr + fetch
 - Lint: Biome
 - 部署: Docker + Github Actions
 
-## 相关链接
+## 快速开始
 
-- https://trpc-swr.vercel.app/
-- https://drizzle-orm.github.io/drizzle-orm/
-- https://hono.dev/
-- https://chakra-ui.com/
-- https://www.biomejs.dev/
+```bash
+# 安装依赖
+bun install
+
+# 启动开发服务器
+bun run dev
