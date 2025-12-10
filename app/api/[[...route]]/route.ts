@@ -1,12 +1,18 @@
 import { Hono } from 'hono'
+import { HTTPException } from 'hono/http-exception'
 import { handle } from 'hono/vercel'
 import userRouter from '@/lib/hono/user'
 
 const app = new Hono().basePath('/api')
 
-// 添加根路由用于测试
-app.get('/', c => {
-  return c.json({ message: 'API is working' })
+// TODO: 全局错误处理示例
+app.onError((error, c) => {
+  console.error('Error caught by global handler:', error)
+  if (error instanceof HTTPException) {
+    console.error('HTTPException cause:', error.cause)
+    return error.getResponse()
+  }
+  return c.json({ success: false, message: 'Internal Server Error' }, 500)
 })
 
 // 注册用户路由
