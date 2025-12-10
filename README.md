@@ -27,3 +27,14 @@ bun install
 
 # 启动开发服务器
 bun run dev
+
+# 访问 http://localhost:3000
+```
+
+## TODO
+- [ ] Drizzle
+- [ ] Auth
+- [ ] Yup
+- [ ] Swr
+- [ ] Formik + Chakra UI 封装组件
+- [ ] 用户登录流程 & 保护路由
