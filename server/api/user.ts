@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
-import db from '../db'
-import { users } from '../db/schema'
+import db from '../lib/db'
+import { users } from '../lib/db/schema'
 
 const userRouter = new Hono()
 
