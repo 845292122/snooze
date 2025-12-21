@@ -1,5 +1,3 @@
-import { ConfigProvider } from 'antd'
-import { ThemeProvider } from 'antd-style'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
@@ -29,9 +27,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}`}
         style={{ padding: 0, margin: 0 }}
       >
-        <ConfigProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </ConfigProvider>
+        {children}
       </body>
     </html>
   )
