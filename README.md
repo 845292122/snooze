@@ -1,6 +1,6 @@
 # SNOOZE
 
-> 描述：基于 Next.js + Hono 的单体 SaaS 脚手架，支持 API-first 架构、前后端类型安全、轻量认证和表单验证，可未来扩展移动端。
+> 基于 Next.js + Hono 的单体 SaaS 脚手架，支持 API-first 架构、前后端类型安全、轻量认证和表单验证，可未来扩展移动端。
 
 ---
 
