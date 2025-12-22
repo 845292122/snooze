@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm'
-import { mysqlTable, primaryKey } from 'drizzle-orm/mysql-core'
+import { mysqlTable } from 'drizzle-orm/mysql-core'
 
 export const users = mysqlTable('user', d => ({
   id: d

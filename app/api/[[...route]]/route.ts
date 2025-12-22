@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 import { handle } from 'hono/vercel'
-import userRouter from '@/server/api/user'
+import userRouter from '@/server/routes/user'
 
 const app = new Hono().basePath('/api')
 
