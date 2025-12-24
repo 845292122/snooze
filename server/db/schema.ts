@@ -1,5 +1,6 @@
 import {
   boolean,
+  int,
   mysqlEnum,
   mysqlTable,
   serial,
@@ -24,7 +25,7 @@ export const users = mysqlTable('users', {
 // * OAuth
 export const userOAuths = mysqlTable('user_oauths', {
   id: serial('id').primaryKey(),
-  userId: serial('user_id').notNull(),
+  userId: int('user_id').notNull(),
   provider: varchar('provider', { length: 50 }).notNull(),
   providerId: varchar('provider_user_id', { length: 255 }).notNull(),
   accessToken: varchar('access_token', { length: 500 }),
@@ -37,7 +38,7 @@ export const userOAuths = mysqlTable('user_oauths', {
 // * 会话表
 export const userSessions = mysqlTable('user_sessions', {
   id: serial('id').primaryKey(),
-  userId: serial('user_id').notNull(),
+  userId: int('user_id').notNull(),
   token: varchar('token', { length: 512 }).notNull(),
   type: mysqlEnum('type', ['access', 'refresh']).notNull(),
   revoked: boolean('revoked').notNull().default(false),
@@ -49,10 +50,10 @@ export const userSessions = mysqlTable('user_sessions', {
 // * 审计日志
 export const auditLogs = mysqlTable('audit_logs', {
   id: serial('id').primaryKey(),
-  userId: serial('user_id').notNull(),
+  userId: int('user_id').notNull(),
   action: varchar('action', { length: 255 }).notNull(),
   targetType: varchar('target_type', { length: 50 }),
-  targetId: serial('target_id'),
+  targetId: int('target_id'),
   ip: varchar('ip', { length: 50 }),
   createdAt: timestamp('created_at').notNull().defaultNow()
 })
@@ -60,7 +61,7 @@ export const auditLogs = mysqlTable('audit_logs', {
 // * 扩展信息
 export const userProfiles = mysqlTable('user_profiles', {
   id: serial('id').primaryKey(),
-  userId: serial('user_id').notNull(),
+  userId: int('user_id').notNull(),
   avatar: varchar('avatar', { length: 255 }),
   name: varchar('name', { length: 100 }).notNull(),
   address: varchar('address', { length: 255 }),
