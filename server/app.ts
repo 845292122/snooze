@@ -1,7 +1,8 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
-import { logger } from './lib'
-import { corsMiddleware, traceIdMiddleware } from './middlewares'
+import { logger } from './lib/logger'
+import { corsMiddleware } from './middlewares/cors'
+import { traceIdMiddleware } from './middlewares/trace-id'
 
 type Variables = {
   traceId: string

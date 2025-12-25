@@ -31,7 +31,7 @@
 - [ ] worker
 - [ ] csv解析
 - [ ] jwt/lucia封装
-- [ ] swr+fetch封装
+- [x] swr+fetch封装
 - [x] 限流
 - [ ] 接口幂等
 - [ ] 防抖/节流

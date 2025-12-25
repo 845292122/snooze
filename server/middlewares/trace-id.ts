@@ -1,10 +1,11 @@
 import type { MiddlewareHandler } from 'hono'
-import { logger } from '../lib'
+import { COMMON_CONSTANT } from '~/shared/constants/common'
+import { logger } from '../lib/logger'
 
 export const traceIdMiddleware: MiddlewareHandler = async (c, next) => {
-  const traceId = c.req.header('x-request-id') ?? crypto.randomUUID()
+  const traceId = c.req.header(COMMON_CONSTANT.TRACE_ID) ?? crypto.randomUUID()
   c.set('traceId', traceId)
-  c.header('x-request-id', traceId)
+  c.header(COMMON_CONSTANT.TRACE_ID, traceId)
   c.set(
     'logger',
     logger.child({

@@ -21,6 +21,7 @@
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.45.0",
     "hono": "^4.10.7",
+    "lodash-es": "^4.17.22",
     "lucia-auth": "^1.8.0",
     "mysql2": "^3.15.3",
     "next": "16.0.7",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@chakra-ui/cli": "^3.30.0",
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@types/node": "^20",
