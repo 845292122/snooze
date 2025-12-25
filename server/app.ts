@@ -3,8 +3,13 @@ import { HTTPException } from 'hono/http-exception'
 import { logger } from './lib'
 import { corsMiddleware, traceIdMiddleware } from './middlewares'
 
-const app = new Hono({})
+type Variables = {
+  traceId: string
+}
 
+const app = new Hono<{ Variables: Variables }>()
+
+//* traceId -> CORS -> rateLimit -> idempotency -> JWT -> 路由
 app.use('*', traceIdMiddleware)
 app.use('*', corsMiddleware)
 
@@ -16,14 +21,20 @@ app.notFound(c => {
 // * 全局异常处理
 app.onError((err, c) => {
   if (err instanceof HTTPException) {
-    return err.getResponse()
+    return c.json(
+      {
+        message: err.message,
+        traceId: c.get('traceId')
+      },
+      err.status
+    )
   }
 
   logger.error({ err }, 'Unhandled error')
   return c.json(
     {
-      success: false,
-      message: err.message || 'Internal Server Error'
+      message: 'Internal Server Error',
+      traceId: c.get('traceId')
     },
     500
   )
