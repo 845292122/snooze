@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid'
 import { toaster } from '~/client/components/Toaster'
 import { authStore } from '~/client/stores/auth'
-import { logger } from '~/server/lib/logger'
 import { COMMON_CONSTANT } from '~/shared/constants/common'
 
 const SLOW_REQUEST_THRESHOLD = 2000 // 2 秒
@@ -31,14 +30,11 @@ export async function fetcher<T>(url: string, options: RequestInit = {}): Promis
 
     const duration = performance.now() - start
     if (duration > SLOW_REQUEST_THRESHOLD) {
-      logger.warn(
-        {
-          url,
-          duration,
-          traceId
-        },
-        'Slow request'
-      )
+      console.warn('Slow request', {
+        url,
+        duration,
+        traceId
+      })
     }
 
     if (!res.ok) {
