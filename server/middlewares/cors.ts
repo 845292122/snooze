@@ -4,7 +4,7 @@ import { cors } from 'hono/cors'
 const DEFAULT_ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 
 export const corsMiddleware: MiddlewareHandler = cors({
-  origin: (origin, c) => {
+  origin: (origin, _) => {
     // 无 Origin（curl / server-to-server）
     if (!origin) return '*'
 
