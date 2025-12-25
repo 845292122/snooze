@@ -1,11 +1,12 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 import { logger } from './lib'
-import { traceIdMiddleware } from './middlewares/trace-id'
+import { corsMiddleware, traceIdMiddleware } from './middlewares'
 
 const app = new Hono({})
 
 app.use('*', traceIdMiddleware)
+app.use('*', corsMiddleware)
 
 // * 404处理
 app.notFound(c => {
