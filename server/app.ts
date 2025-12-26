@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
+import { auth } from './lib/auth'
 import { logger } from './lib/logger'
 import { corsMiddleware } from './middlewares/cors'
 import { traceIdMiddleware } from './middlewares/trace-id'
@@ -9,6 +10,10 @@ type Variables = {
 }
 
 const app = new Hono<{ Variables: Variables }>()
+
+app.on(['POST', 'GET'], '/auth/*', c => {
+  return auth.handler(c.req.raw)
+})
 
 //* traceId -> CORS -> rateLimit -> idempotency -> JWT -> 路由
 app.use('*', traceIdMiddleware)

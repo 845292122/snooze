@@ -1,7 +1,8 @@
+import { relations } from 'drizzle-orm'
 import {
   boolean,
+  index,
   int,
-  mysqlEnum,
   mysqlTable,
   serial,
   text,
@@ -9,57 +10,105 @@ import {
   varchar
 } from 'drizzle-orm/mysql-core'
 
-// * 用户表
-export const users = mysqlTable('users', {
-  id: serial('id').primaryKey(),
-  phone: varchar('phone', { length: 20 }).notNull(),
-  passwordHash: varchar('password_hash', { length: 255 }).notNull(),
-  role: mysqlEnum('role', ['admin', 'user']).notNull().default('user'),
-  type: mysqlEnum('type', ['normal', 'premium']).notNull().default('normal'),
-  isActive: boolean('is_active').notNull().default(true),
-  deletedAt: timestamp('deleted_at'),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
+// * 登录用户信息
+export const user = mysqlTable('user', {
+  id: varchar('id', { length: 36 }).primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  emailVerified: boolean('email_verified').default(false).notNull(),
+  image: text('image'),
+  // admin | user | premium
+  role: varchar('role', { length: 50 }).notNull().default('user'),
+  createdAt: timestamp('created_at', { fsp: 3 }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { fsp: 3 })
+    .defaultNow()
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull()
 })
 
-// * OAuth
-export const userOAuths = mysqlTable('user_oauths', {
-  id: serial('id').primaryKey(),
-  userId: int('user_id').notNull(),
-  provider: varchar('provider', { length: 50 }).notNull(),
-  providerId: varchar('provider_user_id', { length: 255 }).notNull(),
-  accessToken: varchar('access_token', { length: 500 }),
-  refreshToken: varchar('refresh_token', { length: 500 }),
-  expiresAt: timestamp('expires_at'),
-  created_at: timestamp('created_at').notNull().defaultNow(),
-  updated_at: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
-})
+// * 会话信息
+export const session = mysqlTable(
+  'session',
+  {
+    id: varchar('id', { length: 36 }).primaryKey(),
+    expiresAt: timestamp('expires_at', { fsp: 3 }).notNull(),
+    token: varchar('token', { length: 255 }).notNull().unique(),
+    createdAt: timestamp('created_at', { fsp: 3 }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { fsp: 3 })
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+    ipAddress: text('ip_address'),
+    userAgent: text('user_agent'),
+    userId: varchar('user_id', { length: 36 })
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' })
+  },
+  table => [index('session_userId_idx').on(table.userId)]
+)
 
-// * 会话表
-export const userSessions = mysqlTable('user_sessions', {
-  id: serial('id').primaryKey(),
-  userId: int('user_id').notNull(),
-  token: varchar('token', { length: 512 }).notNull(),
-  type: mysqlEnum('type', ['access', 'refresh']).notNull(),
-  revoked: boolean('revoked').notNull().default(false),
-  expiresAt: timestamp('expires_at').notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
-})
+// * 第三方账号信息
+export const account = mysqlTable(
+  'account',
+  {
+    id: varchar('id', { length: 36 }).primaryKey(),
+    accountId: text('account_id').notNull(),
+    providerId: text('provider_id').notNull(),
+    userId: varchar('user_id', { length: 36 })
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    accessToken: text('access_token'),
+    refreshToken: text('refresh_token'),
+    idToken: text('id_token'),
+    accessTokenExpiresAt: timestamp('access_token_expires_at', { fsp: 3 }),
+    refreshTokenExpiresAt: timestamp('refresh_token_expires_at', { fsp: 3 }),
+    scope: text('scope'),
+    password: text('password'),
+    createdAt: timestamp('created_at', { fsp: 3 }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { fsp: 3 })
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull()
+  },
+  table => [index('account_userId_idx').on(table.userId)]
+)
 
-// * 审计日志
-export const auditLogs = mysqlTable('audit_logs', {
-  id: serial('id').primaryKey(),
-  userId: int('user_id').notNull(),
-  action: varchar('action', { length: 255 }).notNull(),
-  targetType: varchar('target_type', { length: 50 }),
-  targetId: int('target_id'),
-  ip: varchar('ip', { length: 50 }),
-  createdAt: timestamp('created_at').notNull().defaultNow()
-})
+// * 验证码/重置密码等
+export const verification = mysqlTable(
+  'verification',
+  {
+    id: varchar('id', { length: 36 }).primaryKey(),
+    identifier: varchar('identifier', { length: 255 }).notNull(),
+    value: text('value').notNull(),
+    expiresAt: timestamp('expires_at', { fsp: 3 }).notNull(),
+    createdAt: timestamp('created_at', { fsp: 3 }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { fsp: 3 })
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull()
+  },
+  table => [index('verification_identifier_idx').on(table.identifier)]
+)
+
+export const userRelations = relations(user, ({ many }) => ({
+  sessions: many(session),
+  accounts: many(account)
+}))
+
+export const sessionRelations = relations(session, ({ one }) => ({
+  user: one(user, {
+    fields: [session.userId],
+    references: [user.id]
+  })
+}))
+
+export const accountRelations = relations(account, ({ one }) => ({
+  user: one(user, {
+    fields: [account.userId],
+    references: [user.id]
+  })
+}))
 
 // * 扩展信息
-export const userProfiles = mysqlTable('user_profiles', {
+export const userProfile = mysqlTable('user_profiles', {
   id: serial('id').primaryKey(),
   userId: int('user_id').notNull(),
   avatar: varchar('avatar', { length: 255 }),
@@ -72,4 +121,15 @@ export const userProfiles = mysqlTable('user_profiles', {
   deletedAt: timestamp('deleted_at'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
+})
+
+// * 审计日志
+export const auditLog = mysqlTable('audit_logs', {
+  id: serial('id').primaryKey(),
+  userId: int('user_id').notNull(),
+  action: varchar('action', { length: 255 }).notNull(),
+  targetType: varchar('target_type', { length: 50 }),
+  targetId: int('target_id'),
+  ip: varchar('ip', { length: 50 }),
+  createdAt: timestamp('created_at').notNull().defaultNow()
 })
