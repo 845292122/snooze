@@ -25,6 +25,7 @@ import {
   AiOutlineSearch,
   AiOutlineUpload
 } from 'react-icons/ai'
+import FormDialog from '~/client/components/FormDialog'
 
 /**
  * 模拟账户数据
@@ -95,6 +96,7 @@ export default function DemoPage() {
     )
   }
 
+  const [dialogOpen, setDialogOpen] = useState(false)
   return (
     <Flex w="full" h="full" gap={4}>
       {/* 左侧搜索和筛选区域 */}
@@ -226,10 +228,11 @@ export default function DemoPage() {
                 <AiOutlineDownload size={16} />
                 下载
               </Button>
-              <Button size="sm" colorPalette="blue">
+              {/* <Button size="sm" colorPalette="blue" onClick={() => setDialogOpen(true)}>
                 <AiOutlinePlus size={16} />
                 新建
-              </Button>
+              </Button> */}
+              <FormDialog />
             </HStack>
           </Flex>
 
