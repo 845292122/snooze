@@ -1,8 +1,9 @@
+import { AntdRegistry } from '@ant-design/nextjs-registry'
+import { ConfigProvider } from 'antd'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { Toaster } from '~/client/components/Toaster'
-import { ChakraUIProvider } from '~/client/providers/ChakraUIProvider'
-import { SWRProvider } from '~/client/providers/SWRProvider'
+import 'antd/dist/antd.css'
+import zhCN from 'antd/locale/zh_CN'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,12 +31,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}`}
         style={{ padding: 0, margin: 0 }}
       >
-        <ChakraUIProvider>
-          <SWRProvider>
-            {children}
-            <Toaster />
-          </SWRProvider>
-        </ChakraUIProvider>
+        <ConfigProvider theme={{ zeroRuntime: true }} locale={zhCN}>
+          <AntdRegistry>{children}</AntdRegistry>
+        </ConfigProvider>
       </body>
     </html>
   )
