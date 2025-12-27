@@ -30,13 +30,13 @@
 - [ ] 封装权限开关
 - [ ] worker
 - [ ] csv解析
-- [ ] jwt/lucia封装
+- [x] better-auth封装
 - [x] swr+fetch封装
 - [x] 限流
 - [ ] 接口幂等
 - [ ] 防抖/节流
 - [ ] 审计日志
-- [ ] mysql索引
+- [x] mysql索引
 - [ ] 超时控制
 - [ ] 错误兜底UI
 - [x] cors

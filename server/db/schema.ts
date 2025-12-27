@@ -108,7 +108,7 @@ export const accountRelations = relations(account, ({ one }) => ({
 }))
 
 // * 扩展信息
-export const userProfile = mysqlTable('user_profiles', {
+export const userProfile = mysqlTable('user_profile', {
   id: serial('id').primaryKey(),
   userId: int('user_id').notNull(),
   avatar: varchar('avatar', { length: 255 }),
@@ -124,7 +124,7 @@ export const userProfile = mysqlTable('user_profiles', {
 })
 
 // * 审计日志
-export const auditLog = mysqlTable('audit_logs', {
+export const auditLog = mysqlTable('audit_log', {
   id: serial('id').primaryKey(),
   userId: int('user_id').notNull(),
   action: varchar('action', { length: 255 }).notNull(),
@@ -132,4 +132,27 @@ export const auditLog = mysqlTable('audit_logs', {
   targetId: int('target_id'),
   ip: varchar('ip', { length: 50 }),
   createdAt: timestamp('created_at').notNull().defaultNow()
+})
+
+// * demo
+export const demoCustomer = mysqlTable('demo_customer', {
+  id: int('id').primaryKey().autoincrement(),
+  name: varchar('name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  phone: varchar('phone', { length: 20 }),
+  address: varchar('address', { length: 255 }),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
+})
+
+export const demoOrder = mysqlTable('demo_order', {
+  id: int('id').primaryKey().autoincrement(),
+  customerId: int('customer_id')
+    .notNull()
+    .references(() => demoCustomer.id, { onDelete: 'cascade' }),
+  orderDate: timestamp('order_date').notNull().defaultNow(),
+  status: varchar('status', { length: 50 }).notNull().default('pending'),
+  totalAmount: int('total_amount').notNull().default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
 })

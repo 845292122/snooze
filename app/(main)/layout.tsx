@@ -55,6 +55,11 @@ const pages: PageProps[] = [
     label: '账户',
     icon: AiFillAccountBook,
     path: '/accounts'
+  },
+  {
+    label: '顾客demo',
+    icon: AiFillAccountBook,
+    path: '/demo'
   }
 ]
 
