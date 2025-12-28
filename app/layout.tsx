@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import 'antd/dist/antd.css'
 import zhCN from 'antd/locale/zh_CN'
+import './global.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
