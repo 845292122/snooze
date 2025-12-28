@@ -6,7 +6,14 @@ import { Flex } from 'antd'
 export default function EntracnceLayout({ children }: { children: React.ReactNode }) {
   return (
     <Flex
-      style={{ width: '100vw', height: '100vh' }}
+      style={{
+        width: '100vw',
+        height: '100vh',
+        backgroundImage: 'url(/loginBg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
       align="center"
       justify="center"
       vertical={true}

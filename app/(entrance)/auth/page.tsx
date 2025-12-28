@@ -9,20 +9,15 @@ type FieldType = {
   remeberMe: boolean
 }
 
-/**
- * 登录页面
- * 手机号/验证码登录
- * 微信登录
- */
-export default function LoginPage() {
+export default function AuthPage() {
   return (
     <Flex vertical={true} align="center" style={{ width: '350px' }}>
-      <Typography.Title level={4}>欢迎回来</Typography.Title>
+      <Typography.Title level={3}>欢迎回来</Typography.Title>
       <Typography.Paragraph type="secondary" style={{}}>
         登录您的账户以继续访问系统
       </Typography.Paragraph>
 
-      <Form name="login" style={{ width: '100%', marginBottom: '-20px' }}>
+      <Form name="login" style={{ width: '100%', marginBottom: '-20px', marginTop: '20px' }}>
         <Form.Item<FieldType> name="phone">
           <Input placeholder="手机号" prefix={<MobileOutlined />} />
         </Form.Item>
@@ -37,14 +32,7 @@ export default function LoginPage() {
           </Row>
         </Form.Item>
         <Form.Item<FieldType> name="remeberMe" valuePropName="checked">
-          <Flex justify="space-between" align="center">
-            <Checkbox>保持登录</Checkbox>
-            <div>
-              <Button block type="link">
-                还没有账号?
-              </Button>
-            </div>
-          </Flex>
+          <Checkbox>保持登录</Checkbox>
         </Form.Item>
       </Form>
 
