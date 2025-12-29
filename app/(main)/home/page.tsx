@@ -1,6 +1,13 @@
 'use client'
 
-import { Button } from 'antd'
+import { Column } from '@ant-design/charts'
+import {
+  ArrowDownOutlined,
+  ArrowUpOutlined,
+  CarryOutOutlined,
+  UserOutlined
+} from '@ant-design/icons'
+import { Alert, Button, Card, Flex, Space, Statistic, Typography } from 'antd'
 
 /**
  * 模拟最近事件数据
@@ -36,6 +43,34 @@ const RECENT_EVENTS = [
   }
 ]
 
+const data = [
+  { type: '1-3秒', value: 0.6 },
+  { type: '4-10秒', value: 1 },
+  { type: '11-30秒', value: 0.7 },
+  { type: '31-60秒', value: 0.5 },
+  { type: '1-3分', value: 0.2 },
+  { type: '3-10分', value: 0.5 },
+  { type: '10-30分', value: 0.3 },
+  { type: '30+分', value: 0.25 }
+]
+
+const config = {
+  data,
+  xField: 'type',
+  yField: 'value',
+  markBackground: {
+    style: {
+      fill: '#eee'
+    }
+  },
+  scale: {
+    y: {
+      domain: [0, 1]
+    }
+  },
+  legend: false
+}
+
 /**
  * 模拟今日任务数据
  */
@@ -56,9 +91,190 @@ const INITIAL_TASKS = [
  */
 export default function HomePage() {
   return (
-    <div>
-      home
-      <Button type="primary">Button</Button>
-    </div>
+    <Flex vertical style={{ width: '100%' }}>
+      <Alert
+        title="Informational Notes"
+        description="Additional description and information about copywriting."
+        type="info"
+        showIcon
+        closable
+        styles={{
+          root: {
+            marginBottom: 20
+          }
+        }}
+      />
+      {/* 统计卡片 */}
+      <Flex gap={22}>
+        <Card hoverable style={{ width: '100%', borderRadius: '8px' }}>
+          <Statistic
+            title={
+              <Space size="small">
+                <UserOutlined style={{ color: '#1890ff' }} />
+                <span>累计访问量</span>
+              </Space>
+            }
+            value={112893}
+            // 使用 styles.value 代替已弃用的 valueStyle
+            styles={{
+              content: {
+                fontSize: '28px',
+                fontWeight: 700,
+                color: 'rgba(0, 0, 0, 0.88)'
+              }
+            }}
+          />
+
+          {/* 趋势对比区 */}
+          <div style={{ marginTop: 16, display: 'flex', gap: '16px' }}>
+            <Space size={4}>
+              <Typography.Text type="secondary">周同比</Typography.Text>
+              <Typography.Text color="error" style={{ color: '#cf1322', fontWeight: 500 }}>
+                12% <ArrowUpOutlined />
+              </Typography.Text>
+            </Space>
+
+            <Space size={4}>
+              <Typography.Text type="secondary">日环比</Typography.Text>
+              <Typography.Text style={{ color: '#3f8600', fontWeight: 500 }}>
+                5% <ArrowDownOutlined />
+              </Typography.Text>
+            </Space>
+          </div>
+        </Card>
+        <Card hoverable style={{ width: '100%', borderRadius: '8px' }}>
+          <Statistic
+            title={
+              <Space size="small">
+                <UserOutlined style={{ color: '#1890ff' }} />
+                <span>累计访问量</span>
+              </Space>
+            }
+            value={112893}
+            // 使用 styles.value 代替已弃用的 valueStyle
+            styles={{
+              content: {
+                fontSize: '28px',
+                fontWeight: 700,
+                color: 'rgba(0, 0, 0, 0.88)'
+              }
+            }}
+          />
+
+          {/* 趋势对比区 */}
+          <div style={{ marginTop: 16, display: 'flex', gap: '16px' }}>
+            <Space size={4}>
+              <Typography.Text type="secondary">周同比</Typography.Text>
+              <Typography.Text color="error" style={{ color: '#cf1322', fontWeight: 500 }}>
+                12% <ArrowUpOutlined />
+              </Typography.Text>
+            </Space>
+
+            <Space size={4}>
+              <Typography.Text type="secondary">日环比</Typography.Text>
+              <Typography.Text style={{ color: '#3f8600', fontWeight: 500 }}>
+                5% <ArrowDownOutlined />
+              </Typography.Text>
+            </Space>
+          </div>
+        </Card>
+        <Card hoverable style={{ width: '100%', borderRadius: '8px' }}>
+          <Statistic
+            title={
+              <Space size="small">
+                <UserOutlined style={{ color: '#1890ff' }} />
+                <span>累计访问量</span>
+              </Space>
+            }
+            value={112893}
+            // 使用 styles.value 代替已弃用的 valueStyle
+            styles={{
+              content: {
+                fontSize: '28px',
+                fontWeight: 700,
+                color: 'rgba(0, 0, 0, 0.88)'
+              }
+            }}
+          />
+
+          {/* 趋势对比区 */}
+          <div style={{ marginTop: 16, display: 'flex', gap: '16px' }}>
+            <Space size={4}>
+              <Typography.Text type="secondary">周同比</Typography.Text>
+              <Typography.Text color="error" style={{ color: '#cf1322', fontWeight: 500 }}>
+                12% <ArrowUpOutlined />
+              </Typography.Text>
+            </Space>
+
+            <Space size={4}>
+              <Typography.Text type="secondary">日环比</Typography.Text>
+              <Typography.Text style={{ color: '#3f8600', fontWeight: 500 }}>
+                5% <ArrowDownOutlined />
+              </Typography.Text>
+            </Space>
+          </div>
+        </Card>
+        <Card hoverable style={{ width: '100%', borderRadius: '8px' }}>
+          <Statistic
+            title={
+              <Space size="small">
+                <UserOutlined style={{ color: '#1890ff' }} />
+                <span>累计访问量</span>
+              </Space>
+            }
+            value={112893}
+            // 使用 styles.value 代替已弃用的 valueStyle
+            styles={{
+              content: {
+                fontSize: '28px',
+                fontWeight: 700,
+                color: 'rgba(0, 0, 0, 0.88)'
+              }
+            }}
+          />
+
+          {/* 趋势对比区 */}
+          <div style={{ marginTop: 16, display: 'flex', gap: '16px' }}>
+            <Space size={4}>
+              <Typography.Text type="secondary">周同比</Typography.Text>
+              <Typography.Text color="error" style={{ color: '#cf1322', fontWeight: 500 }}>
+                12% <ArrowUpOutlined />
+              </Typography.Text>
+            </Space>
+
+            <Space size={4}>
+              <Typography.Text type="secondary">日环比</Typography.Text>
+              <Typography.Text style={{ color: '#3f8600', fontWeight: 500 }}>
+                5% <ArrowDownOutlined />
+              </Typography.Text>
+            </Space>
+          </div>
+        </Card>
+      </Flex>
+
+      <Flex gap="large" style={{ marginTop: 20 }}>
+        <Flex style={{ width: '70%' }} vertical>
+          <div style={{ height: '600px' }}>
+            <Typography.Title level={4} style={{ margin: 0 }}>
+              <CarryOutOutlined style={{ fontSize: 20, marginRight: 5 }} />
+              访问时长分布
+            </Typography.Title>
+            <Column {...config} />
+          </div>
+          <div>
+            <Typography.Title level={4} style={{ margin: 0 }}>
+              <CarryOutOutlined style={{ fontSize: 20, marginRight: 5 }} />
+              最近活动
+            </Typography.Title>
+          </div>
+        </Flex>
+        <Flex flex={1}>
+          <Typography.Title level={4} style={{ margin: 0 }}>
+            <CarryOutOutlined style={{ fontSize: 20, marginRight: 5 }} />
+            今日任务
+          </Typography.Title>
+        </Flex>
+      </Flex>
+    </Flex>
   )
 }

@@ -205,7 +205,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           </Popover>
         </Flex>
       </Flex>
-      <Flex flex={1} style={{ padding: 35 }}>
+      <Flex flex={1} style={{ padding: 20, overflow: 'auto' }}>
         {children}
       </Flex>
     </Flex>
