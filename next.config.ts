@@ -4,9 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   devIndicators: false,
-  experimental: {
-    optimizePackageImports: ['@chakra-ui/react']
-  }
+  experimental: {}
 }
 
 export default nextConfig

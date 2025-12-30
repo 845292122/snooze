@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { Toaster } from '~/client/components/Toaster'
-import { ChakraUIProvider } from '~/client/providers/ChakraUIProvider'
+import { Providers as HeroProvider } from '~/client/providers/HeroProvider'
 import { SWRProvider } from '~/client/providers/SWRProvider'
+import './globals.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,12 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}`}
         style={{ padding: 0, margin: 0 }}
       >
-        <ChakraUIProvider>
-          <SWRProvider>
-            {children}
-            <Toaster />
-          </SWRProvider>
-        </ChakraUIProvider>
+        <HeroProvider>
+          <SWRProvider>{children}</SWRProvider>
+        </HeroProvider>
       </body>
     </html>
   )

@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid'
-import { toaster } from '~/client/components/Toaster'
 import { authStore } from '~/client/stores/auth'
 import { COMMON_CONSTANT } from '~/shared/constants/common'
 
@@ -38,12 +37,7 @@ export async function fetcher<T>(url: string, options: RequestInit = {}): Promis
     }
 
     if (!res.ok) {
-      toaster.create({
-        title: 'Error',
-        description: json.message || 'Request failed',
-        type: 'error',
-        meta: { closable: true }
-      })
+      // toast
       const error = new Error(json.message || 'Request Error')
       // biome-ignore lint/suspicious/noExplicitAny: need to attach traceId to error object
       ;(error as any).traceId = json.traceId
@@ -53,12 +47,7 @@ export async function fetcher<T>(url: string, options: RequestInit = {}): Promis
     return json.data as T
     // biome-ignore lint/suspicious/noExplicitAny: error object type is unknown
   } catch (err: any) {
-    toaster.create({
-      title: 'Error',
-      description: err.message || 'Request failed',
-      type: 'error',
-      meta: { closable: true }
-    })
-    throw err
+    // toast
+    console.log(err)
   }
 }
