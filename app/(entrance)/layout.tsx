@@ -1,9 +1,4 @@
-import {
-  BsBuildingFill,
-  BsFillPersonLinesFill,
-  BsFillPostageHeartFill,
-  BsFillShieldLockFill
-} from 'react-icons/bs'
+import { ArrowsUpFromLine, Blocks, FileUser, HeartPulse } from 'lucide-react'
 import AcmeLogo from '~/client/components/Logo'
 
 export default function EntracnceLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +14,7 @@ export default function EntracnceLayout({ children }: { children: React.ReactNod
 
           <div className="space-y-8">
             <div className="flex gap-4">
-              <BsBuildingFill className="w-6 h-6 text-blue-600 shrink-0" />
+              <Blocks className="w-6 h-6 text-blue-600 shrink-0" />
               <div>
                 <h3 className="font-bold text-sm mb-2">多租户架构</h3>
                 <p className="text-gray-600 text-xs leading-relaxed">
@@ -29,7 +24,7 @@ export default function EntracnceLayout({ children }: { children: React.ReactNod
             </div>
 
             <div className="flex gap-4">
-              <BsFillPersonLinesFill className="w-6 h-6 text-purple-600 shrink-0" />
+              <FileUser className="w-6 h-6 text-purple-600 shrink-0" />
               <div>
                 <h3 className="font-bold text-sm mb-2">灵活的权限管理</h3>
                 <p className="text-gray-600 text-xs leading-relaxed">
@@ -39,7 +34,7 @@ export default function EntracnceLayout({ children }: { children: React.ReactNod
             </div>
 
             <div className="flex gap-4">
-              <BsFillPostageHeartFill className="w-6 h-6 text-orange-600 shrink-0" />
+              <HeartPulse className="w-6 h-6 text-orange-600 shrink-0" />
               <div>
                 <h3 className="font-bold text-sm mb-2">开箱即用</h3>
                 <p className="text-gray-600 text-xs leading-relaxed">
@@ -49,7 +44,7 @@ export default function EntracnceLayout({ children }: { children: React.ReactNod
             </div>
 
             <div className="flex gap-4">
-              <BsFillShieldLockFill className="w-6 h-6 text-green-600 shrink-0" />
+              <ArrowsUpFromLine className="w-6 h-6 text-green-600 shrink-0" />
               <div>
                 <h3 className="font-bold text-sm mb-2">安全可靠</h3>
                 <p className="text-gray-600 text-xs leading-relaxed">

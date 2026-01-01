@@ -2,8 +2,9 @@
 
 import { Button, Checkbox, Input, Link } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { SiWechat } from '@icons-pack/react-simple-icons'
+import { LockKeyhole, Smartphone } from 'lucide-react'
 import { Controller, useForm } from 'react-hook-form'
-import { BsLock, BsPhone, BsWechat } from 'react-icons/bs'
 import z from 'zod'
 
 const schema = z.object({
@@ -44,7 +45,7 @@ export default function LoginForm() {
             type="text"
             {...field}
             isInvalid={!!(touchedFields.phone && errors.phone)}
-            startContent={<BsPhone size={18} />}
+            startContent={<Smartphone size={18} />}
           />
         )}
       />
@@ -69,7 +70,7 @@ export default function LoginForm() {
               type="password"
               {...field}
               isInvalid={!!(touchedFields.password && errors.password)}
-              startContent={<BsLock size={18} />}
+              startContent={<LockKeyhole size={18} />}
             />
           )}
         />
@@ -105,7 +106,7 @@ export default function LoginForm() {
         color="success"
         fullWidth
         isDisabled
-        startContent={<BsWechat size={18} />}
+        startContent={<SiWechat size={18} />}
       >
         使用微信登录
       </Button>
