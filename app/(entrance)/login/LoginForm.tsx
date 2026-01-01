@@ -3,7 +3,7 @@
 import { Button, Checkbox, Input, Link } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
-import { BsFingerprint, BsLock, BsPhone } from 'react-icons/bs'
+import { BsLock, BsPhone, BsWechat } from 'react-icons/bs'
 import z from 'zod'
 
 const schema = z.object({
@@ -105,7 +105,7 @@ export default function LoginForm() {
         color="success"
         fullWidth
         isDisabled
-        startContent={<BsFingerprint size={18} />}
+        startContent={<BsWechat size={18} />}
       >
         使用微信登录
       </Button>
