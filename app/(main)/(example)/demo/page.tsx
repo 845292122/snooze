@@ -21,11 +21,10 @@ import {
   AiOutlineDownload,
   AiOutlineEdit,
   AiOutlineLineChart,
-  AiOutlinePlus,
   AiOutlineSearch,
   AiOutlineUpload
 } from 'react-icons/ai'
-import FormDialog from '~/client/components/FormDialog'
+import FormDrawer from '~/client/components/FormDrawer'
 
 /**
  * 模拟账户数据
@@ -232,7 +231,7 @@ export default function DemoPage() {
                 <AiOutlinePlus size={16} />
                 新建
               </Button> */}
-              <FormDialog />
+              <FormDrawer />
             </HStack>
           </Flex>
 
