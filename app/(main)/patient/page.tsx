@@ -7,5 +7,5 @@
  * 多选数据后顶部出现批量操作ActionBar
  */
 export default function PatientPage() {
-  return <div>123</div>
+  return <div>patient</div>
 }

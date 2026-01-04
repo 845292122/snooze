@@ -7,5 +7,5 @@
  * 显示当天所有事件
  */
 export default function CalendarPage() {
-  return <div>123</div>
+  return <div>calendar</div>
 }

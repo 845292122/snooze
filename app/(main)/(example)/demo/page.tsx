@@ -7,5 +7,5 @@
  * 多选数据后底部出现批量操作drawer
  */
 export default function DemoPage() {
-  return <div>123</div>
+  return <div>demo</div>
 }

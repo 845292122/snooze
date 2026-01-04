@@ -12,7 +12,7 @@ import { Button } from '@heroui/react'
 export default function HomePage() {
   return (
     <div>
-      <Button>Click me</Button>
+      <Button>home</Button>
     </div>
   )
 }
