@@ -1,14 +1,9 @@
 'use client'
 
 import {
-  Avatar,
   Button,
   Drawer,
   DrawerContent,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Navbar,
   NavbarContent,
   type PressEvent,
@@ -16,10 +11,10 @@ import {
   Tooltip,
   useDisclosure
 } from '@heroui/react'
-import { BarChart3, Home, LogOut, Menu, Settings, User, Users } from 'lucide-react'
+import { BarChart3, Home, Menu, Settings, Users } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import Profile from '~/client/components/Profile'
 
 // * 导航菜单项配置
 const menuItems = [
@@ -103,7 +98,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <Logo />
         </NavbarContent>
         <NavbarContent justify="end">
-          <UserAvatarDropdown />
+          <Profile />
         </NavbarContent>
       </Navbar>
 
@@ -121,9 +116,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       </Drawer>
 
       {/* --- 桌面端侧边栏 --- */}
-      <aside className="hidden md:flex flex-col w-[64px] h-screen sticky top-0 border-r border-divider bg-content1/30 backdrop-blur-md">
+      <aside className="hidden md:flex flex-col w-16 h-screen sticky top-0 border-r border-divider bg-content1/30 backdrop-blur-md">
         {/* 头部固定 */}
-        <div className="h-16 flex items-center justify-center flex-shrink-0">
+        <div className="h-16 flex items-center justify-center shrink-0">
           <Logo />
         </div>
 
@@ -133,8 +128,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         </ScrollShadow>
 
         {/* 底部固定 */}
-        <div className="h-16 flex items-center justify-center flex-shrink-0 border-t border-divider">
-          <UserAvatarDropdown />
+        <div className="h-16 flex items-center justify-center shrink-0 border-t border-divider">
+          <Profile />
         </div>
       </aside>
 
@@ -143,42 +138,5 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <div className="p-2 md:p-4">{children}</div>
       </main>
     </div>
-  )
-}
-
-// * 用户头像下拉菜单组件
-function UserAvatarDropdown() {
-  const [placement, setPlacement] = useState<'bottom' | 'right-end'>('bottom')
-
-  useEffect(() => {
-    const handleResize = () => {
-      setPlacement(window.innerWidth >= 768 ? 'right-end' : 'bottom')
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  return (
-    <Dropdown placement={placement} backdrop="blur">
-      <DropdownTrigger>
-        <Avatar
-          isBordered
-          as="button"
-          size="sm"
-          className="transition-transform hover:scale-105 w-7 h-7 text-[10px] cursor-pointer"
-          src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        />
-      </DropdownTrigger>
-      <DropdownMenu aria-label="User Actions" variant="flat">
-        <DropdownItem key="profile" startContent={<User size={14} />}>
-          个人中心
-        </DropdownItem>
-        <DropdownItem key="logout" color="danger" startContent={<LogOut size={14} />}>
-          退出登录
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
   )
 }
