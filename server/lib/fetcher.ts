@@ -38,9 +38,10 @@ class HttpClient {
 
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({}))
-      const error = new Error(errorData.message || 'Network response was not ok')
-      ;(error as any).status = res.status
-      ;(error as any).data = errorData
+      // biome-ignore lint/suspicious/noExplicitAny: error object needs dynamic properties
+      const error = new Error(errorData.message || 'Network response was not ok') as any
+      error.status = res.status
+      error.data = errorData
       throw error
     }
 

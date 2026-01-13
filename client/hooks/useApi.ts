@@ -8,7 +8,7 @@ export function useApi<T>(url: string | null, config?: SWRConfiguration<T>) {
 }
 
 // POST 请求 Hook
-export function useApiMutation<T, A = unknown>(url: string, method = 'POST') {
+export function useApiMutation<T, A = unknown>(url: string) {
   return useSWRMutation<T, Error, string, A>(url, async (key, { arg }) => {
     return http.post<T>(key, arg)
   })
