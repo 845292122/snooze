@@ -321,7 +321,7 @@ export default function DemoPage() {
 
         {/* ActionBar - 选中时显示 */}
         {selectedAccounts.length > 0 && (
-          <Box position="absolute" top={0} left={0} right={0} zIndex={10}>
+          <Box position="absolute" bottom={0} left={0} right={0} zIndex={10}>
             <ActionBar.Root open>
               <ActionBar.Content>
                 <ActionBar.SelectionTrigger>
