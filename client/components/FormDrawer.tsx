@@ -55,6 +55,7 @@ export default function FormDrawer() {
       unmountOnExit
       lazyMount
       open={open}
+      placement="top"
       onOpenChange={d => {
         setOpen(d.open)
         if (!d.open) reset()
@@ -91,34 +92,32 @@ export default function FormDrawer() {
                           value={field.value ? [field.value] : []}
                           onValueChange={({ value }) => field.onChange(value[0])}
                           onInteractOutside={() => field.onBlur()}
+                          positioning={{ sameWidth: true }}
                           collection={genders}
                         >
                           <Select.HiddenSelect />
                           <Select.Control>
-                            <Select.Trigger>
+                            <Select.Trigger type="button">
                               <Select.ValueText placeholder="请选择性别" />
                             </Select.Trigger>
                             <Select.IndicatorGroup>
                               <Select.Indicator />
                             </Select.IndicatorGroup>
                           </Select.Control>
-                          <Portal>
-                            <Select.Positioner>
-                              <Select.Content>
-                                {genders.items.map(gender => (
-                                  <Select.Item item={gender} key={gender.value}>
-                                    {gender.label}
-                                    <Select.ItemIndicator />
-                                  </Select.Item>
-                                ))}
-                              </Select.Content>
-                            </Select.Positioner>
-                          </Portal>
+                          <Select.Positioner>
+                            <Select.Content>
+                              {genders.items.map(gender => (
+                                <Select.Item item={gender} key={gender.value}>
+                                  <Select.ItemText>{gender.label}</Select.ItemText>
+                                  <Select.ItemIndicator />
+                                </Select.Item>
+                              ))}
+                            </Select.Content>
+                          </Select.Positioner>
                         </Select.Root>
                       )}
                     />
                   </Field.Root>
-                  <Button type="submit">提交</Button>
                 </VStack>
               </form>
             </Drawer.Body>

@@ -23,7 +23,9 @@ import {
   AiOutlineAudit,
   AiOutlineLogout,
   AiOutlineMenu,
-  AiOutlineQuestionCircle
+  AiOutlineQuestionCircle,
+  AiOutlineSetting,
+  AiOutlineUser
 } from 'react-icons/ai'
 
 /**
@@ -125,10 +127,16 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <Menu.Positioner>
                 <Menu.Content>
                   <Menu.Item value="account" cursor="pointer">
-                    Account
+                    <Flex align="center" gap={2}>
+                      <AiOutlineUser size={16} />
+                      <Text>Account</Text>
+                    </Flex>
                   </Menu.Item>
                   <Menu.Item value="settings" cursor="pointer">
-                    Settings
+                    <Flex align="center" gap={2}>
+                      <AiOutlineSetting size={16} />
+                      <Text>Settings</Text>
+                    </Flex>
                   </Menu.Item>
                   <Menu.Item
                     value="logout"
@@ -137,7 +145,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     onClick={handleLogout}
                   >
                     <Flex align="center" gap={2}>
-                      {/* <Logout theme="outline" size="16" /> */}
+                      <AiOutlineLogout size={16} />
                       <Text>退出登录</Text>
                     </Flex>
                   </Menu.Item>
@@ -279,10 +287,16 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   <Menu.Positioner>
                     <Menu.Content>
                       <Menu.Item value="account" cursor="pointer">
-                        Account
+                        <Flex align="center" gap={2}>
+                          <AiOutlineUser size={16} />
+                          <Text>Account</Text>
+                        </Flex>
                       </Menu.Item>
                       <Menu.Item value="settings" cursor="pointer">
-                        Settings
+                        <Flex align="center" gap={2}>
+                          <AiOutlineSetting size={16} />
+                          <Text>Settings</Text>
+                        </Flex>
                       </Menu.Item>
                       <Menu.Item
                         value="logout"
