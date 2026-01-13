@@ -7,6 +7,7 @@ import {
   serial,
   text,
   timestamp,
+  tinyint,
   varchar
 } from 'drizzle-orm/mysql-core'
 
@@ -134,12 +135,13 @@ export const auditLog = mysqlTable('audit_log', {
   createdAt: timestamp('created_at').notNull().defaultNow()
 })
 
-// * demo
+// * (1) create schema demo
 export const demoCustomer = mysqlTable('demo_customer', {
   id: int('id').primaryKey().autoincrement(),
   name: varchar('name', { length: 100 }).notNull(),
   email: varchar('email', { length: 255 }).notNull().unique(),
   phone: varchar('phone', { length: 20 }),
+  gender: tinyint('gender', { unsigned: true }),
   address: varchar('address', { length: 255 }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
@@ -156,3 +158,15 @@ export const demoOrder = mysqlTable('demo_order', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow()
 })
+
+// * (2) 定义关联关系
+export const customerRelations = relations(demoCustomer, ({ many }) => ({
+  demoOrders: many(demoOrder)
+}))
+
+export const orderRelations = relations(demoOrder, ({ one }) => ({
+  customer: one(demoCustomer, {
+    fields: [demoOrder.customerId],
+    references: [demoCustomer.id]
+  })
+}))

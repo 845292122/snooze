@@ -95,7 +95,7 @@ export default function DemoPage() {
     )
   }
 
-  const [dialogOpen, setDialogOpen] = useState(false)
+  const [_dialogOpen, _setDialogOpen] = useState(false)
   return (
     <Flex w="full" h="full" gap={4}>
       {/* 左侧搜索和筛选区域 */}

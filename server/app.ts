@@ -4,12 +4,13 @@ import { auth } from './lib/auth'
 import { logger } from './lib/logger'
 import { corsMiddleware } from './middlewares/cors'
 import { traceIdMiddleware } from './middlewares/trace-id'
+import demoRouter from './routes/demo.route'
 
 type Variables = {
   traceId: string
 }
 
-const app = new Hono<{ Variables: Variables }>()
+const app = new Hono<{ Variables: Variables }>().basePath('/api')
 
 app.on(['POST', 'GET'], '/auth/*', c => {
   return auth.handler(c.req.raw)
@@ -45,5 +46,7 @@ app.onError((err, c) => {
     500
   )
 })
+
+app.route('/demo', demoRouter)
 
 export default app
