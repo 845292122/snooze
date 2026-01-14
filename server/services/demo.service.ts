@@ -1,14 +1,17 @@
 import db from '~/server/db'
 import { demoCustomer, demoOrder } from '~/server/db/schema'
+import type { CreateCustomerInput } from '~/shared/schemas/demo.schema'
 
-export async function createDemo() {
+export async function createDemo(customerData: CreateCustomerInput) {
+  const { name, email, phone } = customerData
+
   await db.transaction(async tx => {
     const customerIds = await tx
       .insert(demoCustomer)
       .values({
-        name: 'Demo Customer',
-        email: '123@qq.com',
-        phone: '1234567890'
+        name,
+        email,
+        phone
       })
       .$returningId()
 
