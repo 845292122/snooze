@@ -40,3 +40,28 @@
 - [ ] 超时控制
 - [ ] 错误兜底UI
 - [x] cors
+
+
+## env template
+```
+# Drizzle
+DATABASE_URL="mysql://root:12345678@localhost:3306/snooze-chakra"
+
+# cors origins
+# CORS_ORIGINS=http://localhost:3000,http://
+
+# BetterAuth
+# openssl rand -base64 32
+BETTER_AUTH_SECRET=sozqHiB19H83xHJ4jFKct13mmhdarr0j
+BETTER_AUTH_URL=http://localhost:3000
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+# GitHub OAuth
+# GITHUB_CLIENT_ID=your-github-client-id
+# GITHUB_CLIENT_SECRET=your-github-client-secret
+
+
+# basre api url
+API_BASE_URL="/api"
+
+```
