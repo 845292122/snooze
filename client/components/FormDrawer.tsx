@@ -29,9 +29,9 @@ type FormValues = z.infer<typeof schema>
 
 const genders = createListCollection({
   items: [
-    { label: '男', value: 1 },
-    { label: '女', value: 2 },
-    { label: '其他', value: 0 }
+    { label: '男', value: '1' },
+    { label: '女', value: '2' },
+    { label: '其他', value: '3' }
   ]
 })
 
